@@ -1,0 +1,78 @@
+
+        <form [formGroup]="employeeForm">
+            <div class="d-flex flex-row bd-highlight mb-3">
+
+                <div class="form-froup row" style="width: 60%;">
+        <label class="col-sm-2 col-form-label">Employee Name</label>
+        <div class="col-sm-10">
+            <input type="text"  class="form-control" formControlName="employeeName" [(ngModel)]="EmployeeName"
+            placeholder="Enter Employee Name" >
+            <div *ngIf="isValidInput('employeeName')"
+            class="alert alert-danger">
+            <div *ngIf="employeeForm.controls['employeeName'].errors.required">
+              Name is required.
+            </div>
+         
+          </div>
+            
+         
+        </div>
+        <label class="col-sm-2 col-form-label">Age</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" required [(ngModel)]="Age"
+            placeholder="Enter Age">
+        </div>
+
+        <label class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" formControlName="email" [(ngModel)]="Email"
+            placeholder="Enter Email">
+
+            <div *ngIf="isValidInput('email')"
+            class="alert alert-danger">
+            <div *ngIf="employeeForm.controls['email'].errors.required">
+              Email is required.
+            </div>
+            <div *ngIf="employeeForm.controls['email'].errors.pattern">
+              Must be a valid email format.
+            </div>
+          </div>
+        </div>
+        <label class="col-sm-2 col-form-label">Address</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control"  [(ngModel)]="Address"
+            placeholder="Enter Address">
+        </div>
+    
+        <label class="col-sm-2 col-form-label">Department Name</label>
+        <div class="col-sm-10">
+           <select class="form-control" [(ngModel)]="DepartmentId">
+               <option>--Select--</option>
+               <option *ngFor="let depName of DepartmentsList" value="{{depName.DepartmentId}}">
+                   {{depName.DepartmentName}}
+               </option>
+           </select>
+        </div>
+    
+        <label class="col-sm-2 col-form-label">Joined Date</label>
+        <div class="col-sm-10">
+            <input type="date"  [(ngModel)]="JoinedDate">
+        </div>
+   
+    </div>
+    <div class="ml-3 bd-highlight" style="width: 40%;">
+    <img [src]=PhotoFilePath height="250px;" width="200px;">
+    <input type="file" (change)="uploadPhoto($event)" class="mt-2"/>
+    </div>
+
+    </div>
+    
+    
+    <button (click)="addEmployee()" *ngIf="emp.EmployeeId==0" class="btn btn-primary">
+        Add
+    </button>
+    
+    <button (click)="updateEmployee()" *ngIf="emp.EmployeeId!=0" class="btn btn-primary">
+        Update
+    </button>
+</form>
